@@ -162,9 +162,9 @@ public final class UnitDefFact implements IUnitDefFact {
 
     private final String wreckName;
 
-    private final String deathExplosion;
+    private final WeaponDef deathExplosion;
 
-    private final String selfDExplosion;
+    private final WeaponDef selfDExplosion;
 
     private final String categoryString;
 
@@ -428,7 +428,7 @@ public final class UnitDefFact implements IUnitDefFact {
                         final float maxHeightDif, final float minWaterDepth, final float waterline,
                         final float maxWaterDepth, final float armoredMultiple, final int armorType,
                         final float maxWeaponRange, final String type, final String tooltip, final String wreckName,
-                        final String deathExplosion, final String selfDExplosion, final String categoryString,
+                        final WeaponDef deathExplosion, final WeaponDef selfDExplosion, final String categoryString,
                         final boolean isAbleToSelfD, final int selfDCountdown, final boolean isAbleToSubmerge,
                         final boolean isAbleToFly, final boolean isAbleToMove, final boolean isAbleToHover,
                         final boolean isFloater, final boolean isBuilder, final boolean isActivateWhenBuilt,
@@ -883,7 +883,8 @@ public final class UnitDefFact implements IUnitDefFact {
 
     @Override
     public float getAirLosRadius() {
-        return airLosRadius;    }
+        return airLosRadius;
+    }
 
     @Override
     public float getLosHeight() {
@@ -1053,12 +1054,12 @@ public final class UnitDefFact implements IUnitDefFact {
     }
 
     @Override
-    public String getDeathExplosion() {
+    public WeaponDef getDeathExplosion() {
         return deathExplosion;
     }
 
     @Override
-    public String getSelfDExplosion() {
+    public WeaponDef getSelfDExplosion() {
         return selfDExplosion;
     }
 

@@ -166,9 +166,9 @@ public interface IUnitDefFact {
 
     String getWreckName();
 
-    String getDeathExplosion();
+    WeaponDef getDeathExplosion();
 
-    String getSelfDExplosion();
+    WeaponDef getSelfDExplosion();
 
     String getCategoryString();
 
