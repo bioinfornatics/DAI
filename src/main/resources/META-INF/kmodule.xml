@@ -1,0 +1,14 @@
+<kmodule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://jboss.org/kie/6.0.0/kmodule">
+
+  <kbase name="KBase" default="false" eventProcessingMode="stream" equalsBehavior="equality" declarativeAgenda="enabled" packages="org.springrts.dai">
+
+    <ksession name="DAI" type="stateful" clockType="realtime">
+
+    </ksession>
+
+  </kbase>
+
+</kmodule>
+
+

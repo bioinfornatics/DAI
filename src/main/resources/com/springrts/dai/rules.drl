@@ -1,0 +1,105 @@
+package com.springrts.dai;
+
+
+query isCommander(Unit $unit)
+    UnitDef( this == $unit, isCommander == true )
+end
+
+
+query isBuilder(Unit $unit)
+    UnitDef( this == $unit, isBuilder == true )
+end
+
+
+query isPlane(Unit $unit)
+    UnitDef( this == $unit, isAbleToFly == true )
+end
+
+
+query isHover(Unit $unit)
+    UnitDef( this == $unit, isAbleToHover == true )
+end
+
+
+query isFloater(Unit $unit)
+    UnitDef( this == $unit, isFloater == true )
+end
+
+
+query isAbleToAttack(Unit $unit)
+    UnitDef( this == $unit, isAbleToAttack == true )
+end
+
+
+query isAbleToPatrol(Unit $unit)
+    UnitDef( this == $unit, isAbleToPatrol == true )
+end
+
+
+query isAbleToFight(Unit $unit)
+    UnitDef( this == $unit, isAbleToFight == true )
+end
+
+
+query isAirBase(Unit $unit)
+    UnitDef( this == $unit, isAirBase == true )
+end
+
+
+query isFirePlatform(Unit $unit)
+    UnitDef( this == $unit, isFirePlatform == true )
+end
+
+
+query isFactory(Unit $unit)
+    $unitDef:   UnitDef(
+                            this                == $unit,
+                            isBuilder           == true,
+                            isAbleToMove        == true,
+                            speed               == 0,
+                            buildOptions.empty  == false
+                       )
+end
+
+
+
+rule "Unit is destroyed"
+when
+    $player:    IAIPlayer()
+    $unit1:     IUnitFact( teamId = $player.teamId ) from entry-point "unitDestroyed"
+    $unit2:     Unit( teamId = $player.teamId, unitId = unit1.unitId )
+then
+    retract( $unit1 )
+    retract( $unit2 )
+end
+
+
+rule "Need energy"
+when
+    $player:            IAIPlayer()
+    $resource:          IResource( energyUsage < energyIncome ) from entry-point "update"
+    $unitDef:           IUnitDefFact( isBuilder = true, isAbleToMove = true )
+    $unit:              IUnit( $unit.teamId = $resource.teamId, unitDefId = $unitDef.unitDefId )
+then
+
+end
+
+
+rule "Need metal"
+when
+    $player:            IAIPlayer()
+    $resource:          IResource( energyUsage < energyIncome ) from entry-point "update"
+    $unitDef:           IUnitDefFact( isBuilder = true, isAbleToMove = true )
+    $unit:              IUnit( teamId = $resource.teamId, unitDefId = $unitDef.unitDefId )
+then
+
+end
+
+
+rule "Need builder"
+when
+    $unitDef:           IUnitDefFact( isBuilder = true, isAbleToMove = true )
+    not( IUnit( teamId = $resource.teamId, unitDefId = $unitDef.unitDefId ) )
+then
+
+end
